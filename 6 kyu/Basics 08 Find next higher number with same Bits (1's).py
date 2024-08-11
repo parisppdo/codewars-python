@@ -1,19 +1,13 @@
 def next_higher(n):
+    # Creating the left part of the asked number
+    next_higher = n + (n & -n)
     
-    # Converting the given number into its binary form
-    bnr = bin(n)[2:]
-
-    # Counting the ones of the binary number
-    ones = bnr.count("1")
-
-    # Finding the number using a While loop
-    while True:
-        n += 1
-        ones2 = bin(n)[2:].count("1")
-        if ones == ones2:
-            break
+    # creating the right part of the asked number
+    right_ones_pattern = n ^ next_higher
+    right_ones_pattern = (right_ones_pattern // (n & -n)) >> 2
     
-    return n
+    # Adding the two, to create the final form
+    return next_higher | right_ones_pattern
 
-a = next_higher(201326592)
+a = next_higher(128)
 print(a)
