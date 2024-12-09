@@ -8,6 +8,3 @@ def next_higher(n):
     
     # Adding the two, to create the final form
     return next_higher | right_ones_pattern
-
-a = next_higher(128)
-print(a)
