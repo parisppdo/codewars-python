@@ -1,18 +1,26 @@
 def calculate_sum(N, K):
-    divisible = []
-    non_divisible = []
     divider = K
+    total_sum = 0
+    cache = {}
 
     for count in range(1, N + 1):
         if (count % divider) != 0:
-            non_divisible.append(count)
+            total_sum += count
         else:
+            key = count
+
             while count % K == 0:
+                if count in cache:
+                    count = cache[count]
+                    break
                 count = count // divider
-            divisible.append(count)
 
-    divisible_sum = sum(divisible)
-    non_divisible_sum = sum(non_divisible)
+            if key not in cache:
+                cache[key] = count
+            total_sum += count
 
-    return divisible_sum + non_divisible_sum
+    return total_sum
 
+print(calculate_sum(10, 4))
+print(calculate_sum(25, 9))
+print(calculate_sum(66, 2))
